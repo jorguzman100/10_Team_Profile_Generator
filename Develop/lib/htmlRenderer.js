@@ -1,9 +1,12 @@
 const path = require("path");
 const fs = require("fs");
 
+// The path. resolve() method is used to resolve a sequence of path-segments to an absolute path
 const templatesDir = path.resolve(__dirname, "../templates");
+console.log('templatesDir: ', templatesDir);
 
 const render = employees => {
+  console.log('render / employees: ', employees);
   const html = [];
 
   html.push(employees
@@ -59,6 +62,9 @@ const renderMain = html => {
 };
 
 const replacePlaceholders = (template, placeholder, value) => {
+  // JavaScript Regular Expressions: https://www.w3schools.com/js/js_regexp.asp
+  // A regular expression is a sequence of characters that forms a search pattern.
+  // The search pattern can be used for text search and text replace operations.
   const pattern = new RegExp("{{ " + placeholder + " }}", "gm");
   return template.replace(pattern, value);
 };
