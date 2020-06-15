@@ -6,7 +6,6 @@ const path = require("path");
 const fs = require("fs");
 
 // npm path: https://www.npmjs.com/package/path
-
 // The path.resolve() method resolves a sequence of paths or path segments into an absolute path.
 // Using __dirname is the absolute path to the directory containing the source file. When you use path.resolve or path.join they will return the same result if you give the same path following __dirname. In such cases it's really just a matter of preference.
 const OUTPUT_DIR = path.resolve(__dirname, "output");
@@ -50,10 +49,7 @@ const selectEmployeeType = () => {
             default: 'Engineer',
         },
     ]).then((answer) => {
-        console.log('emploType: ', answer.emploType);
         if (answer.emploType === 'No more employees') {
-            console.log('Team created!');
-            console.log('teamMembers: ', teamMembers);
             createHTMLFile();
         } else {
             inputBasicInfo(answer);
@@ -98,7 +94,6 @@ const inputSpecificInfo = (answer, basicInfo) => {
             ]).then((specificInfo) => {
                 const aManger = new Manager(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.officeNumber);
                 teamMembers.push(aManger);
-                console.log('teamMembers: ', teamMembers);
                 selectEmployeeType();
             });
             break;
@@ -112,7 +107,6 @@ const inputSpecificInfo = (answer, basicInfo) => {
             ]).then((specificInfo) => {
                 const anEngineer = new Engineer(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.github);
                 teamMembers.push(anEngineer);
-                console.log('teamMembers: ', teamMembers);
                 selectEmployeeType();
             });
             break;
@@ -126,7 +120,6 @@ const inputSpecificInfo = (answer, basicInfo) => {
             ]).then((specificInfo) => {
                 const anIntern = new Intern(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.school);
                 teamMembers.push(anIntern);
-                console.log('teamMembers: ', teamMembers);
                 selectEmployeeType();
             });
             break;
@@ -139,11 +132,6 @@ const createHTMLFile = () => {
     // above) and pass in an array containing all employee objects; the `render` function will
     // generate and return a block of HTML including templated divs for each employee!
     const html = render(teamMembers);
-    console.log('HTML: ', html);
-
-    // After you have your html, you're now ready to create an HTML file using the HTML
-    // returned from the `render` function. Now write it to a file named `team.html` in the
-    // `output` folder. You can use the variable `outputPath` above target this location.
 
     // Hint: you may need to check if the `output` folder exists and create it if it
     // does not.
@@ -155,6 +143,9 @@ const createHTMLFile = () => {
         fs.mkdirSync(dir);
     }
 
+    // After you have your html, you're now ready to create an HTML file using the HTML
+    // returned from the `render` function. Now write it to a file named `team.html` in the
+    // `output` folder. You can use the variable `outputPath` above target this location.
     fs.writeFile(outputPath, html, (error) => {
         if (error) {
             console.log('There was an error: ', error);
@@ -163,15 +154,5 @@ const createHTMLFile = () => {
         }
     });
 }
-
-
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
-
-
 
 selectEmployeeType();
