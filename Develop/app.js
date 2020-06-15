@@ -40,97 +40,138 @@ const { listenerCount } = require("process");
 
 const teamMembers = [];
 
-const inputEmployees = () => {
+const selectEmployeeType = () => {
     inquirer.prompt([
         {
             type: 'list',
             name: 'emploType',
             message: 'Select a employee type to create:',
-            choices: ['Manager', 'Engineer', 'Intern'],
-            default: 'Manager',
+            choices: ['Manager', 'Engineer', 'Intern', 'No more employees'],
+            default: 'Engineer',
         },
     ]).then((answer) => {
-        console.log(answer);
-        inquirer.prompt([
-            {
-                name: 'name',
-                message: 'Name: ',
-                default: 'Employee Name',
-            },
-            {
-                name: 'id',
-                message: 'id: ',
-                default: '001',
-            },
-            {
-                name: 'email',
-                message: 'Email: ',
-                default: 'employee@getdigital.com',
-            },
-        ]).then((basicInfo) => {
-            switch (answer.emploType) {
-                case 'Manager':
-                    inquirer.prompt([
-                        {
-                            name: 'officeNumber',
-                            message: 'Office number: ',
-                            default: '05',
-                        },
-                    ]).then((specificInfo) => {
-                        const aManger = new Manager(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.officeNumber);
-                        teamMembers.push(aManger);
-                        console.log('teamMembers: ', teamMembers);
-                    });
-                    break;
-                case 'Engineer':
-                    inquirer.prompt([
-                        {
-                            name: 'github',
-                            message: 'GitHub user: ',
-                            default: 'gitHubUser',
-                        },
-                    ]).then((specificInfo) => {
-                        const anEngineer = new Engineer(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.github);
-                        teamMembers.push(anEngineer);
-                        console.log('teamMembers: ', teamMembers);
-                    });
-                    break;
-                case 'Intern':
-                    inquirer.prompt([
-                        {
-                            name: 'school',
-                            message: 'School: ',
-                            default: 'Tec de Monterrey',
-                        },
-                    ]).then((specificInfo) => {
-                        const anIntern = new Intern(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.school);
-                        teamMembers.push(anIntern);
-                        console.log('teamMembers: ', teamMembers);
-                    });
-                    break;
-            }
-        });
+        console.log('emploType: ', answer.emploType);
+        if (answer.emploType === 'No more employees') {
+            console.log('Team created!');
+            console.log('teamMembers: ', teamMembers);
+            createHTMLFile();
+        } else {
+            inputBasicInfo(answer);
+        }
     });
 };
 
-inputEmployees();
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
+const inputBasicInfo = (answer) => {
+    inquirer.prompt([
+        {
+            name: 'name',
+            message: 'Name: ',
+            default: 'Employee Name',
+        },
+        {
+            name: 'id',
+            message: 'id: ',
+            default: '001',
+        },
+        {
+            name: 'email',
+            message: 'Email: ',
+            default: 'employee@getdigital.com',
+        },
+    ]).then((basicInfo) => {
+        inputSpecificInfo(answer, basicInfo);
+    });
+}
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
+const inputSpecificInfo = (answer, basicInfo) => {
+    switch (answer.emploType) {
+        case 'Manager':
+            inquirer.prompt([
+                {
+                    name: 'officeNumber',
+                    message: 'Office number: ',
+                    default: '05',
+                },
+            ]).then((specificInfo) => {
+                const aManger = new Manager(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.officeNumber);
+                teamMembers.push(aManger);
+                console.log('teamMembers: ', teamMembers);
+                selectEmployeeType();
+            });
+            break;
+        case 'Engineer':
+            inquirer.prompt([
+                {
+                    name: 'github',
+                    message: 'GitHub user: ',
+                    default: 'gitHubUser',
+                },
+            ]).then((specificInfo) => {
+                const anEngineer = new Engineer(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.github);
+                teamMembers.push(anEngineer);
+                console.log('teamMembers: ', teamMembers);
+                selectEmployeeType();
+            });
+            break;
+        case 'Intern':
+            inquirer.prompt([
+                {
+                    name: 'school',
+                    message: 'School: ',
+                    default: 'Tec de Monterrey',
+                },
+            ]).then((specificInfo) => {
+                const anIntern = new Intern(basicInfo.name, basicInfo.id, basicInfo.email, specificInfo.school);
+                teamMembers.push(anIntern);
+                console.log('teamMembers: ', teamMembers);
+                selectEmployeeType();
+            });
+            break;
+    }
+}
+
+
+const createHTMLFile = () => {
+    // After the user has input all employees desired, call the `render` function (required
+    // above) and pass in an array containing all employee objects; the `render` function will
+    // generate and return a block of HTML including templated divs for each employee!
+    const html = render(teamMembers);
+    console.log('HTML: ', html);
+
+    // After you have your html, you're now ready to create an HTML file using the HTML
+    // returned from the `render` function. Now write it to a file named `team.html` in the
+    // `output` folder. You can use the variable `outputPath` above target this location.
+
+    // Hint: you may need to check if the `output` folder exists and create it if it
+    // does not.
+    // Source: 'How to create a directory if it doesn't exist using Node.js?'
+    // https://stackoverflow.com/questions/21194934/how-to-create-a-directory-if-it-doesnt-exist-using-node-js
+    let dir = './output';
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+
+    fs.writeFile(outputPath, html, (error) => {
+        if (error) {
+            console.log('There was an error: ', error);
+        } else {
+            console.log('HTML file created!');
+        }
+    });
+}
+
+
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+
+selectEmployeeType();

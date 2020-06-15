@@ -3,10 +3,8 @@ const fs = require("fs");
 
 // The path. resolve() method is used to resolve a sequence of path-segments to an absolute path
 const templatesDir = path.resolve(__dirname, "../templates");
-console.log('templatesDir: ', templatesDir);
 
 const render = employees => {
-  console.log('render / employees: ', employees);
   const html = [];
 
   html.push(employees
