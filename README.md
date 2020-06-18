@@ -1,175 +1,101 @@
-# Unit 10 OOP Homework: Template Engine - Employee Summary
+# Team Profile Generator
 
-One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this homework assignment, your challenge is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
+A Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person.
 
+## Badges
 
-## Instructions
+Code quality and validation
 
-You will build a software engineering team generator command line application. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. This assignment must also pass all unit tests. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user. Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/jorguzman100/10_Team_Profile_Generator.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jorguzman100/10_Team_Profile_Generator/context:javascript)
+![shields.io](https://img.shields.io/github/languages/top/jorguzman100/10_Team_Profile_Generator)
+![shields.io](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fjorguzman100.github.io%2F10_Team_Profile_Generator%2F)
 
-```
-As a manager
-I want to generate a webpage that displays my team's basic info
-so that I have quick access to emails and GitHub profiles
-```
+Repository Status
 
-How do you deliver this? Here are some guidelines:
+![shields.io](https://img.shields.io/badge/Repo%20Status-finished-green)
+![shields.io](https://img.shields.io/bitbucket/issues/jorguzman100/10_Team_Profile_Generator)
 
-* Use the [Inquirer npm package](https://github.com/SBoudrias/Inquirer.js/) to prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
+License
 
-* Your app will run as a Node CLI to gather information about each employee.
+![GitHub](https://img.shields.io/github/license/jorguzman100/10_Team_Profile_Generator)
 
-* Below is an example of what your application may look like. Remember, the styling is completely up to you so try to make it unique.
+## Table of contents
 
-![Employee Summary 1](./Assets/10-OOP-homework-demo-1.png)
-![Employee Summary 2](./Assets/10-OOP-homework-demo-2.png)
+- [Team Profile Generator](#team-profile-generator)
+  - [Badges](#badges)
+  - [Table of contents](#table-of-contents)
+  - [The challenge](#the-challenge)
+  - [The development process](#the-development-process)
+  - [The Output](#the-output)
+  - [Installation and Usage](#installation-and-usage)
+  - [Credits, tools and other references](#credits-tools-and-other-references)
+  - [Contributing](#contributing)
+  - [Questions](#questions)
 
-In the `Develop` folder, there is a `package.json`, so make sure to `npm install`.
+## The challenge
 
-The dependencies are, [jest](https://jestjs.io/) for running the provided tests, and [inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user.
+To build a software engineering team generator command line application. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user.
 
-There are also unit tests to help you build the classes necessary.
+Main elements:
 
-It is recommended that you follow this workflow:
+- [x] CLI application to promt user with team member's information
+- [x] Creation of output/team.html with team member's information
+- [x] The application must also pass all unit tests
 
-1. Run tests
-2. Create or update classes to pass a single test case
-3. Repeat
+## The development process
 
-🎗 Remember, you can run the tests at any time with `npm run test`
+In order to accomplish the challenge, the following steps were done:
 
-It is recommended that you start with a directory structure that looks like this:
+1. Understand the purpose, and concept of the application.
+2. Understand the provided code.
+3. Define and code the classes.
+4. Run the tests and apply required adjustments.
+5. Create functionality.
+6. Final review and proper documentation.
+7. Create video to explain use of the application.
 
-```
-lib/           // classes and helper code
-output/        // rendered output
-templates/     // HTML template(s)
-test/          // jest tests
-  Employee.test.js
-  Engineer.test.js
-  Intern.test.js
-  Manager.test.js
-app.js         // Runs the application
-```
+## The Output
 
-### Hints
+With the described process we were able to create a useful command line interface (CLI) application that promts user information from the CLI and creates an HTML file with team's profiles.
 
-* Create multiple HTML templates for each type of user. For example, you could use the following templates:
+**User story**
 
-  * `main.html`
+As a manager, I want to generate a webpage that displays my team's basic info, so that I have quick access to emails and GitHub profiles.
 
-  * `engineer.html`
-  
-  * `intern.html`
-  
-  * `manager.html`
+**The application**
 
-* You will want to make your methods as pure as possible. This means try to make your methods simple so that they are easier to test.
+![](picture url)
 
-* The different employee types should all inherit some methods and properties from a base class of `Employee`.
+## Installation and Usage
 
-* In your HTML template files, you may want to add a placeholder character that helps your program identify where the dynamic markup begins and ends.
+The project was uploaded to [GitHub](https://github.com/) at the following repository:
+[https://github.com/jorguzman100/10_Team_Profile_Generator](https://github.com/jorguzman100/10_Team_Profile_Generator)
 
-## Minimum Requirements
+You can access the deployed application with the GitHup Pages link:
+[https://jorguzman100.github.io/10_Team_Profile_Generator/](https://jorguzman100.github.io/10_Team_Profile_Generator/)
 
-* Functional application.
+To install the project follow these steps:
 
-* GitHub repository with a unique name and a README describing the project.
+1. Download the application from repository.
+2. In the root folder, install components with: npm install
+3. Run the CLI application from the terminal with: node app.js
 
-* User can use the CLI to generate an HTML page that displays information about their team.
+## Credits, tools and other references
 
-* All tests must pass.
+**Third Party Assets**
 
-### Classes
-The project must have the these classes: `Employee`, `Manager`, `Engineer`,
-`Intern`. The tests for these classes in the `tests` directory must all pass.
+[Bootstrap](https://getbootstrap.com/)
 
-The first class is an `Employee` parent class with the following properties and
-methods:
+[Font Awesome](https://fontawesome.com/)
 
-  * name
-  * id
-  * email
-  * getName()
-  * getId()
-  * getEmail()
-  * getRole() // Returns 'Employee'
+[Markup Validation Service](https://validator.w3.org/)
 
-The other three classes will extend `Employee`. 
+## Contributing
 
-In addition to `Employee`'s properties and methods, `Manager` will also have:
+- Pull requests are welcome.
+- For major changes, please open an issue first to discuss what you would like to change.
+- Please make sure to update tests as appropriate.
 
-  * officeNumber
+## Questions
 
-  * getRole() // Overridden to return 'Manager'
-
-In addition to `Employee`'s properties and methods, `Engineer` will also have:
-
-  * github  // GitHub username
-
-  * getGithub()
-
-  * getRole() // Overridden to return 'Engineer'
-
-In addition to `Employee`'s properties and methods, `Intern` will also have:
-
-  * school 
-
-  * getSchool()
-
-  * getRole() // Overridden to return 'Intern'
-
-### User input
-
-The project must prompt the user to build an engineering team. An engineering
-team consists of a manager, and any number of engineers and interns.
-
-### Roster output
-
-The project must generate a `team.html` page in the `output` directory, that displays a nicely formatted team roster. Each team member should display the following in no particular order:
-
-  * Name
-
-  * Role
-
-  * ID
-
-  * Role-specific property (School, link to GitHub profile, or office number)
-
-## Bonus
-
-* Use validation to ensure that the information provided is in the proper expected format.
-
-* Add the application to your portfolio.
-
-## Commit Early and Often
-
-One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:
-
-* Your commit history is a signal to employers that you are actively working on projects and learning new skills.
-
-* Your commit history allows you to revert your codebase in the event that you need to return to a previous state.
-
-Follow these guidelines for committing:
-
-* Make single-purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits.
-
-* Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history.
-
-* Don't commit half-done work, for the sake of your collaborators (and your future self!).
-
-* Test your application before you commit to ensure functionality at every step in the development process.
-
-We would like you to have well over 200 commits by graduation, so commit early and often!
-
-
-## Submission on BCS
-
-You are required to submit the following:
-
-* The URL of the GitHub repository
-
-* A video demonstrating the entirety of the app's functionality 
-
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+If you have questions or you want to share comments, we will be glad to hear from you. Please contact us at jorguzman100@gmail.com.

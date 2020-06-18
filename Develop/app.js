@@ -20,23 +20,6 @@ const { listenerCount } = require("process");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-/* 
-  * Employee:
-  * name
-  * id
-  * email
-  * role
-  * 
-  * Manager: 
-  * officeNumber
-  * 
-  * Engineer:
-  * github
-  * 
-  * Intern:
-  * school
-*/
-
 const teamMembers = [];
 
 const selectEmployeeType = () => {
