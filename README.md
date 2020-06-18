@@ -64,7 +64,9 @@ As a manager, I want to generate a webpage that displays my team's basic info, s
 
 **The application**
 
-![](picture url)
+![screenshot1](./Assets/screenshot1.png)
+![screenshot2](./Assets/screenshot2.png)
+![screenshot3](./Assets/screenshot3.png)
 
 ## Installation and Usage
 
@@ -98,4 +100,4 @@ To install the project follow these steps:
 
 ## Questions
 
-If you have questions or you want to share comments, we will be glad to hear from you. Please contact us at jorguzman100@gmail.com.
+If you have questions or you want to share comments, we will be glad to hear from you. Please contact us at [jorguzman100@gmail.com](jorguzman100@gmail.com).
