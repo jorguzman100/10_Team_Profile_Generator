@@ -82,6 +82,8 @@ To install the project follow these steps:
 2. In the root folder, install components with: npm install
 3. Run the CLI application from the terminal with: node app.js
 
+[Video of the developed application](https://drive.google.com/file/d/1kprnZgkeZeUDDbWrd46Ze4NpeNntekV_/view)
+
 ## Credits, tools and other references
 
 **Third Party Assets**
